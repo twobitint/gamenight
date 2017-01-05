@@ -13,7 +13,8 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+Vue.component('event', require('./components/Event.vue'));
+Vue.component('boardgame', require('./components/Boardgame.vue'));
 
 const app = new Vue({
     el: '#app'

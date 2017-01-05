@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'gamenight'),
 
     /*
     |--------------------------------------------------------------------------
@@ -46,14 +46,14 @@ return [
 
     'connections' => [
 
-        'sqlite' => [
-            'driver' => 'sqlite',
-            'database' => env('DB_DATABASE', database_path('database.sqlite')),
-            'prefix' => '',
+        'bgdb' => [
+            'driver' => env('BGDB_DRIVER', 'sqlite'),
+            'database' => database_path(env('BGDB_DATABASE', 'bgg.sqlite')),
+            'prefix' => ''
         ],
 
-        'mysql' => [
-            'driver' => 'mysql',
+        'gamenight' => [
+            'driver' => env('DB_DRIVER', 'mysql'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'forge'),
