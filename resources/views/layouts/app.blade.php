@@ -15,7 +15,7 @@
     </head>
     <body>
 
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -35,8 +35,11 @@
                         <li class="dropdown {{ strpos(Route::currentRouteName(), 'boardgames') === 0 ? 'active' : '' }}">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Best With <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="{{ route('boardgames') }}">Two</a></li>
-                                <li><a href="{{ route('boardgames') }}">Three</a></li>
+                                <li><a href="{{ route('boardgames', ['players' => 2]) }}">Two</a></li>
+                                <li><a href="{{ route('boardgames', ['players' => 3]) }}">Three</a></li>
+                                <li><a href="{{ route('boardgames', ['players' => 4]) }}">Four</a></li>
+                                <li><a href="{{ route('boardgames', ['players' => 5]) }}">Five</a></li>
+                                <li><a href="{{ route('boardgames', ['players' => 6]) }}">Six Plus</a></li>
                             </ul>
                         </li>
                     </ul>

@@ -6,6 +6,7 @@
             name="{{ $game->name }}"
             description="{{ $game->description }}"
             thumbnail="{{ $game->thumbnail }}"
+            image="{{ $game->image }}"
         ></boardgame>
     @endforeach
 @endsection
