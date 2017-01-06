@@ -7688,4 +7688,40 @@ button.close {
   }
 }
 
+body {
+  padding-top: 70px;
+}
+
+.row-no-gutter {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.row-no-gutter [class*="col-"] {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.panel-boardgame .panel-body {
+  padding: 0;
+}
+
+.panel-boardgame .panel-body .row [class*="col-"]:nth-child(2) .data {
+  border-width: 0 1px 0 1px;
+  border-style: solid;
+  border-color: #eaeaea;
+}
+
+.panel-boardgame .panel-body .data {
+  text-align: center;
+  height: 100%;
+  padding: 10px 0;
+}
+
+.panel-boardgame .panel-body .data .text {
+  font-size: 12pt;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
 /*# sourceMappingURL=app.css.map */

@@ -7,6 +7,7 @@
             description="{{ $game->description }}"
             thumbnail="{{ $game->thumbnail }}"
             image="{{ $game->image }}"
+            rating-bayes="{{ $game->rating_bayes }}"
         ></boardgame>
     @endforeach
 @endsection

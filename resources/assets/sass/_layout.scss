@@ -1,0 +1,13 @@
+body {
+    padding-top: 70px;
+}
+
+.row-no-gutter {
+    margin-left: 0px;
+    margin-right: 0px;
+
+    [class*="col-"] {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
