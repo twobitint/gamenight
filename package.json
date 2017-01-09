@@ -20,6 +20,7 @@
     "vue-resource": "^1.0.3"
   },
   "dependencies": {
+    "bggdb": "github:twobitint/bggdb",
     "react": "^15.4.1",
     "react-dom": "^15.4.1"
   }

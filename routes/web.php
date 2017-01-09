@@ -15,17 +15,24 @@ Route::get('/', function () {
     return view('events');
 })->name('events');
 
-Route::get('/boardgames/{players}', function ($players) {
+Route::get('/boardgames/{players}/{username?}', function ($players, $username = null) {
+
+    $games = DB::connection('bgdb')
+        ->table('games')
+        ->join('players', 'games.id', 'players.game_id')
+        ->select(DB::raw('*, players.best + players.recommended as great'))
+        ->whereRaw('great > 0.7')
+        ->where('players.number', $players)
+        ->where('players.or_more', 0)
+        ->orderBy('games.rank')
+        ->limit(5);
+
+    if ($username) {
+        $games->join('owned', 'owned.game_id', 'games.id')
+            ->where('owned.user', $username);
+    }
+
     return view('boardgames')->with([
-        'games' => DB::connection('bgdb')
-            ->table('games')
-            ->join('players', 'games.id', 'players.game_id')
-            ->select(DB::raw('*, players.best + players.recommended as great'))
-            ->whereRaw('great > 0.7')
-            ->where('players.number', $players)
-            ->where('players.or_more', 0)
-            ->orderBy('games.rank')
-            ->limit(5)
-            ->get()
+        'games' => $games->get()
     ]);
 })->name('boardgames');
