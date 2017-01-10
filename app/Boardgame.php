@@ -13,4 +13,9 @@ class Boardgame extends Model
     {
         return $this->hasMany('App\BoardgamePlayerCount');
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tag', 'games_tags', 'game_id');
+    }
 }

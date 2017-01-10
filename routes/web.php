@@ -17,9 +17,10 @@ Route::get('/', function () {
 
 Route::get('/boardgames/{players}/{username?}', function ($players, $username = null) {
 
-    $games = DB::connection('bgdb')
-        ->table('games')
-        ->join('players', 'games.id', 'players.game_id')
+    //$games = DB::connection('bgdb')
+    //    ->table('games')
+    $games = App\Boardgame::
+        join('players', 'games.id', 'players.game_id')
         ->select(DB::raw('*, players.best + players.recommended as great'))
         ->whereRaw('great > 0.7')
         ->where('players.number', $players)
@@ -35,4 +36,10 @@ Route::get('/boardgames/{players}/{username?}', function ($players, $username = 
     return view('boardgames')->with([
         'games' => $games->get()
     ]);
+
+    // return view('boardgames')->with([
+    //     'games' => App\Game::all()
+    //         ->
+    // ]);
+
 })->name('boardgames');

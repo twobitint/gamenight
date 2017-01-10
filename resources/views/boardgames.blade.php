@@ -8,6 +8,8 @@
             thumbnail="{{ $game->thumbnail }}"
             image="{{ $game->image }}"
             rating-bayes="{{ $game->rating_bayes }}"
+            game="{{ $game->toJson() }}"
+            :tags="{{ $game->tags->toJson() }}"
         ></boardgame>
     @endforeach
 @endsection

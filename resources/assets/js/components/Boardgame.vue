@@ -18,6 +18,11 @@
                     <div class="panel-body">
                         <!-- <img :src="thumbnail" class="img-responsive pull-left" alt="thumbnail"> -->
                         <!-- {{ description }} -->
+                        <ul>
+                            <li v-for="tag in tags">
+                                {{ tag.type }} {{ tag.name }}
+                            </li>
+                        </ul>
                         <div class="row row-no-gutter">
                             <div class="col-xs-4">
                                 <div class="data">
@@ -53,7 +58,7 @@
 
 <script>
     export default {
-        props: ['name', 'description', 'thumbnail', 'image', 'ratingBayes'],
+        props: ['name', 'description', 'thumbnail', 'image', 'ratingBayes', 'game', 'tags'],
         mounted() {
             console.log('Component mounted.')
         }
