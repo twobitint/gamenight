@@ -11594,23 +11594,27 @@ body {
   padding-right: 0px;
 }
 
-.card-boardgame .card-block {
+.boardgame-list .row + .row {
+  margin-top: 1rem;
+}
+
+.boardgame-list .card-boardgame .card-block {
   padding: 0;
 }
 
-.card-boardgame .card-block .row [class*="col-"]:nth-child(2) .data {
+.boardgame-list .card-boardgame .card-block .row [class*="col-"]:nth-child(2) .data {
   border-width: 0 1px 0 1px;
   border-style: solid;
   border-color: #eaeaea;
 }
 
-.card-boardgame .card-block .data {
+.boardgame-list .card-boardgame .card-block .data {
   text-align: center;
   height: 100%;
   padding: 10px 0;
 }
 
-.card-boardgame .card-block .data .text {
+.boardgame-list .card-boardgame .card-block .data .text {
   font-size: 12pt;
   text-transform: uppercase;
   margin-bottom: 10px;

@@ -50,7 +50,7 @@
         </nav>
 
         <div class="flex-center position-ref full-height">
-            <div id="app" class="content">
+            <div id="app" class="content container">
                 @yield('content')
             </div>
         </div>

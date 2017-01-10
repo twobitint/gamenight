@@ -1,23 +1,30 @@
-.card-boardgame {
-    .card-block {
-        padding: 0;
+.boardgame-list {
 
-        .row [class*="col-"]:nth-child(2) .data {
-            border-width: 0 1px 0 1px;
-            border-style: solid;
-            border-color: #eaeaea;
-        }
+    .row+.row {
+        margin-top: 1rem;
+    }
 
-        .data {
-            text-align: center;
-            height: 100%;
-            padding: 10px 0;
+    .card-boardgame {
+        .card-block {
+            padding: 0;
 
-            .text {
-                font-size: 12pt;
-                text-transform: uppercase;
-                // margin-top: 10px;
-                margin-bottom: 10px;
+            .row [class*="col-"]:nth-child(2) .data {
+                border-width: 0 1px 0 1px;
+                border-style: solid;
+                border-color: #eaeaea;
+            }
+
+            .data {
+                text-align: center;
+                height: 100%;
+                padding: 10px 0;
+
+                .text {
+                    font-size: 12pt;
+                    text-transform: uppercase;
+                    // margin-top: 10px;
+                    margin-bottom: 10px;
+                }
             }
         }
     }
