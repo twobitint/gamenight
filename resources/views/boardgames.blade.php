@@ -3,13 +3,7 @@
 @section('content')
     @foreach($games as $game)
         <boardgame
-            name="{{ $game->name }}"
-            description="{{ $game->description }}"
-            thumbnail="{{ $game->thumbnail }}"
-            image="{{ $game->image }}"
-            rating-bayes="{{ $game->rating_bayes }}"
-            game="{{ $game->toJson() }}"
-            :tags="{{ $game->tags->toJson() }}"
+            :data="{!! htmlentities($game->toJson()) !!}"
         ></boardgame>
     @endforeach
 @endsection

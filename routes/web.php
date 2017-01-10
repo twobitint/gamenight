@@ -19,8 +19,8 @@ Route::get('/boardgames/{players}/{username?}', function ($players, $username = 
 
     //$games = DB::connection('bgdb')
     //    ->table('games')
-    $games = App\Boardgame::
-        join('players', 'games.id', 'players.game_id')
+    $games = App\Boardgame::with('tags')
+        ->join('players', 'games.id', 'players.game_id')
         ->select(DB::raw('*, players.best + players.recommended as great'))
         ->whereRaw('great > 0.7')
         ->where('players.number', $players)

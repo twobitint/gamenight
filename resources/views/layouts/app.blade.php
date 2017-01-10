@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <title>Gamenight</title>
 
@@ -15,35 +15,37 @@
     </head>
     <body>
 
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Gamenight</a>
-                </div>
+        <nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top">
 
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li class="{{ strpos(Route::currentRouteName(), 'events') === 0 ? 'active' : '' }}">
-                            <a href="{{ route('events') }}">Home</a>
-                        </li>
-                        <li class="dropdown {{ strpos(Route::currentRouteName(), 'boardgames') === 0 ? 'active' : '' }}">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Best With <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{ route('boardgames', ['players' => 2]) }}">Two</a></li>
-                                <li><a href="{{ route('boardgames', ['players' => 3]) }}">Three</a></li>
-                                <li><a href="{{ route('boardgames', ['players' => 4]) }}">Four</a></li>
-                                <li><a href="{{ route('boardgames', ['players' => 5]) }}">Five</a></li>
-                                <li><a href="{{ route('boardgames', ['players' => 6]) }}">Six Plus</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a class="navbar-brand" href="#">Gamenight</a>
+
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item {{ strpos(Route::currentRouteName(), 'boardgames') === 0 ? 'events' : '' }}">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown {{ strpos(Route::currentRouteName(), 'boardgames') === 0 ? 'active' : '' }}">
+                        <a class="nav-link dropdown-toggle"
+                            href="http://example.com"
+                            id="navbarDropdownMenuLink"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false">
+                            Best With
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{{ route('boardgames', ['players' => 2]) }}">Two</a>
+                            <a class="dropdown-item" href="{{ route('boardgames', ['players' => 3]) }}">Three</a>
+                            <a class="dropdown-item" href="{{ route('boardgames', ['players' => 4]) }}">Four</a>
+                            <a class="dropdown-item" href="{{ route('boardgames', ['players' => 5]) }}">Five</a>
+                            <a class="dropdown-item" href="{{ route('boardgames', ['players' => 6]) }}">Six Plus</a>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </nav>
 
