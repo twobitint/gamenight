@@ -14,14 +14,21 @@
                     /*backgroundBlendMode: 'multiply',
                     backgroundColor: 'rgb(95, 165, 255)'*/
                 }">
-                    <div class="">
-                        {{ data.name }}
-                        <span class="pull-right">
-                            {{ parseFloat(Math.round(data.rating_bayes * 100) / 100).toFixed(2) }}
-                        </span>
+                    <div class="row">
+                        <div class="col">
+                            <small>{{ weight }}</small>
+                        </div>
+                        <div class="col" style="text-align: right;">
+                            <small>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                {{ parseFloat(Math.round(data.rating_bayes * 100) / 100).toFixed(2) }}
+                            </small>
+                        </div>
                     </div>
-                    <div style="display: flex; flex-direction: column; justify-content: flex-end; height: 100%; position: absolute; top: 0;">
-                        {{ weight }}
+                    <div class="row">
+                        <div class="col">
+                            <h3>{{ data.name }}</h3>
+                        </div>
                     </div>
                 </div>
                 <!-- <img :src="image" style="width: auto; height: 100px; min-width: 100%;"> -->
@@ -38,7 +45,7 @@
                             <div class="data">
                                 <div class="text">Wishlisted</div>
                                 <div class="value">
-                                    <i class="fa fa-star" aria-hidden="true" style="font-size: 20pt;"></i>
+                                    <i class="fa fa-heart" aria-hidden="true" style="font-size: 20pt;"></i>
                                 </div>
                             </div>
                         </div>
@@ -46,7 +53,7 @@
                             <div class="data">
                                 <div class="text">Rated</div>
                                 <div class="value">
-                                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="font-size: 20pt;"></span>
+                                    <i class="fa fa-thumbs-up" aria-hidden="true" style="font-size: 20pt;"></i>
                                 </div>
                             </div>
                         </div>
@@ -54,7 +61,7 @@
                             <div class="data">
                                 <div class="text">Owned</div>
                                 <div class="value">
-                                    <span class="glyphicon glyphicon-ok" aria-hidden="true" style="font-size: 20pt;"></span>
+                                    <i class="fa fa-check" aria-hidden="true" style="font-size: 20pt;"></i>
                                 </div>
                             </div>
                         </div>
