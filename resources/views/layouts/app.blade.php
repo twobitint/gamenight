@@ -59,10 +59,14 @@
                                     data-toggle="dropdown"
                                     aria-haspopup="true"
                                     aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->username }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item"
+                                        href="{{ route('user-collection') }}">
+                                        Collection
+                                    </a>
                                     <a class="dropdown-item"
                                         href="{{ url('/logout') }}"
                                         onclick="event.preventDefault();

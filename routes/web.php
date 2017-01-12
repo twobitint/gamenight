@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('events');
 })->name('events');
 
+Route::group(['prefix' => 'user', 'as' => 'user-'], function() {
+    Route::any('collection', 'UserController@collection')->name('collection');
+});
+
 Route::get('/boardgames/{players}/{username?}', function ($players, $username = null) {
 
     //$games = DB::connection('bgdb')
@@ -26,7 +30,7 @@ Route::get('/boardgames/{players}/{username?}', function ($players, $username = 
         ->where('players.number', $players)
         ->where('players.or_more', 0)
         ->orderBy('games.rank')
-        ->limit(5);
+        ->limit(8);
 
     if ($username) {
         $games->join('owned', 'owned.game_id', 'games.id')
