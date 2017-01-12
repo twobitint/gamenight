@@ -45,7 +45,7 @@
                             <div class="data">
                                 <div class="text">Wishlisted</div>
                                 <div class="value">
-                                    <i class="fa fa-heart" aria-hidden="true" style="font-size: 20pt;"></i>
+                                    <i class="fa fa-heart-o" aria-hidden="true" style="font-size: 20pt;"></i>
                                 </div>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                             <div class="data">
                                 <div class="text">Rated</div>
                                 <div class="value">
-                                    <i class="fa fa-thumbs-up" aria-hidden="true" style="font-size: 20pt;"></i>
+                                    <i class="fa fa-thumbs-o-up" aria-hidden="true" style="font-size: 20pt;"></i>
                                 </div>
                             </div>
                         </div>

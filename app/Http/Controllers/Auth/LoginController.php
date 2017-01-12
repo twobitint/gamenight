@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+use Request;
+use URL;
+
 class LoginController extends Controller
 {
     /*
@@ -27,6 +30,11 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/home';
 
+    protected function redirectPath()
+    {
+        return session('from', $this->redirectTo);
+    }
+
     /**
      * Create a new controller instance.
      *
@@ -34,6 +42,10 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        if (Request::has('from')) {
+            session(['from' => Request::get('from')]);
+        }
+
         $this->middleware('guest', ['except' => 'logout']);
     }
 }

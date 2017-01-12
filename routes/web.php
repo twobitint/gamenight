@@ -43,3 +43,7 @@ Route::get('/boardgames/{players}/{username?}', function ($players, $username = 
     // ]);
 
 })->name('boardgames');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

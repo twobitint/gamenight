@@ -24,7 +24,7 @@
             <a class="navbar-brand" href="#">Gamenight</a>
 
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav mr-auto">
                     <li class="nav-item {{ strpos(Route::currentRouteName(), 'boardgames') === 0 ? 'events' : '' }}">
                         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                     </li>
@@ -44,6 +44,38 @@
                             <a class="dropdown-item" href="{{ route('boardgames', ['players' => 5]) }}">Five</a>
                             <a class="dropdown-item" href="{{ route('boardgames', ['players' => 6]) }}">Six Plus</a>
                         </div>
+                    </li>
+                </ul>
+                <ul class="navbar-nav mr-sm-2">
+                    <li>
+                        @if (Auth::guest())
+                            <li><a class="nav-link" href="{{ url('/login?from='.url()->current()) }}">Login</a></li>
+                            <li><a class="nav-link" href="{{ url('/register') }}">Register</a></li>
+                        @else
+                            <li class="nav-item dropdown {{ strpos(Route::currentRouteName(), 'user') === 0 ? 'active' : '' }}">
+                                <a class="nav-link dropdown-toggle"
+                                    href="http://example.com"
+                                    id="navbarDropdownMenuLink"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false">
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item"
+                                        href="{{ url('/logout') }}"
+                                        onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                        Logout
+                                    </a>
+
+                                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </div>
+                            </li>
+                        @endif
                     </li>
                 </ul>
             </div>
