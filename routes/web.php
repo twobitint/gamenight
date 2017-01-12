@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('events');
 })->name('events');
 
-Route::group(['prefix' => 'user', 'as' => 'user-'], function() {
+Route::group(['prefix' => 'user', 'as' => 'user-'], function () {
     Route::any('collection', 'UserController@collection')->name('collection');
 });
 
@@ -45,7 +45,6 @@ Route::get('/boardgames/{players}/{username?}', function ($players, $username = 
     //     'games' => App\Game::all()
     //         ->
     // ]);
-
 })->name('boardgames');
 
 Auth::routes();

@@ -39,7 +39,18 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
-        //
+        $this->mapDevRoutes();
+    }
+
+    protected function mapDevRoutes()
+    {
+        if (config('app.debug')) {
+            Route::group([
+                'namespace' => $this->namespace,
+            ], function ($router) {
+                require base_path('routes/dev.php');
+            });
+        }
     }
 
     /**
