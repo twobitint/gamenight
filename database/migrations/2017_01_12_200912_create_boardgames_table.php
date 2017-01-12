@@ -23,6 +23,9 @@ class CreateBoardgamesTable extends Migration
             $table->string('year');
             $table->integer('min_players');
             $table->integer('max_players');
+            $table->integer('min_playtime');
+            $table->integer('max_playtime');
+            $table->integer('playtime');
             $table->integer('users_rated');
             $table->decimal('rating_average', 7, 5);
             $table->decimal('rating_bayes', 7, 5);
