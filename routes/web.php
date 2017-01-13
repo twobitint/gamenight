@@ -24,16 +24,15 @@ Route::get('/boardgames/{players}/{username?}', function ($players, $username = 
     //$games = DB::connection('bgdb')
     //    ->table('games')
     $games = App\Boardgame::with('tags')
-        ->join('players', 'games.id', 'players.game_id')
-        ->select(DB::raw('*, players.best + players.recommended as great'))
-        ->whereRaw('great > 0.7')
-        ->where('players.number', $players)
-        ->where('players.or_more', 0)
-        ->orderBy('games.rank')
+        ->join('bgg_recommendations', 'boardgames.id', 'bgg_recommendations.boardgame_id')
+        ->where('optimal', '>', '0.7')
+        ->where('bgg_recommendations.players', $players)
+        ->where('bgg_recommendations.or_more', 0)
+        ->orderBy('boardgames.rank')
         ->limit(8);
 
     if ($username) {
-        $games->join('owned', 'owned.game_id', 'games.id')
+        $games->join('owned', 'owned.game_id', 'boardgames.id')
             ->where('owned.user', $username);
     }
 

@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 
 use GuzzleHttp\Client;
 
+use App\Http\Controllers\BGGController;
 use App\Boardgame;
 
 class UpdateGames extends Command
@@ -15,7 +16,7 @@ class UpdateGames extends Command
      *
      * @var string
      */
-    protected $signature = 'bgg:update {--all}';
+    protected $signature = 'bgg:update {--all} {--hot}';
 
     /**
      * The console command description.
@@ -23,6 +24,8 @@ class UpdateGames extends Command
      * @var string
      */
     protected $description = 'Update games from the BGG dataset';
+
+    protected $lastBGGRequest = 0;
 
     /**
      * Create a new command instance.
@@ -42,35 +45,48 @@ class UpdateGames extends Command
     public function handle()
     {
         if ($this->option('all')) {
-            $this->handleAll();
+            $this->handleFrom(1);
+        } elseif ($this->option('hot')) {
+            $this->handleHot();
         } else {
             $this->handleFromLast();
         }
     }
 
-    protected function handleAll()
+    protected function handleFrom($id)
     {
-        $this->handleOne(1);
+        $game = null;
+        $id = 1;
+        while ($game !== false) {
+            $game = $this->handleOne($id);
+            $id++;
+        }
+    }
+
+    protected function handleHot()
+    {
+        $xml = $this->bggRequest('hot', ['query' => ['type' => 'boardgame']]);
+        $this->info('Getting Hot List from BGG.');
+
+        foreach ($xml->item as $item) {
+            $this->handleOne((int)$item['id']);
+        }
     }
 
     protected function handleFromLast()
     {
-        $this->handleOne(1);
+        $game = Boardgame::orderBy('updated_at')->take(1)->get();
+        $this->handleFrom($game->id);
     }
 
     protected function handleOne($id)
     {
-        $client = new Client([
-            'base_uri' => 'https://www.boardgamegeek.com/xmlapi2/'
-        ]);
-        $response = $client->get('thing', [
+        $xml = $this->bggRequest('thing', [
             'query' => [
                 'id' => $id,
                 'stats' => 1
             ]
         ]);
-
-        $xml = new \SimpleXMLElement($response->getBody());
 
         // This id has no bgg data
         $thing = $xml->item;
@@ -78,43 +94,37 @@ class UpdateGames extends Command
             return;
         }
 
-        // We only want boardgames and expansions
-        $type = $thing->attributes()->type;
-        if ($type != 'boardgame' && $type != 'boardgameexpansion') {
-            return;
+        $game = BGGController::updateGame($thing);
+
+        // We have reached the end of the list OR this is not the type we want
+        // Either false or null
+        if (!$game) {
+            return $game;
         }
 
-        $name = is_array($thing->name) ? $thing->name[0]->attributes()->value : $thing->name->attributes()->value;
-        $rank = is_array($thing->statistics->ratings->ranks->rank) ?
-            array_filter($thing->statistics->ratings->ranks->rank, function ($e) {
-                return $e->attributes()->name == 'boardgame';
-            })[0]->value :
-            $thing->statistics->ratings->ranks->rank->attributes()->value;
+        BGGController::updateTags($thing, $game);
+        BGGController::updatePlayerCounts($thing, $game);
 
-        $game = Boardgame::updateOrCreate(
-            ['id' => $id],
-            [
-                'name' => $name,
-                'rank' => $rank,
-                'type' => $type,
-                'thumbnail' => $thing->thumbnail,
-                'image' => $thing->image,
-                'description' => $thing->description,
-                'year' => $thing->yearpublished->attributes()->value,
-                'min_players' => $thing->minplayers->attributes()->value,
-                'max_players' => $thing->maxplayers->attributes()->value,
-                'playtime' => $thing->playingtime->attributes()->value,
-                'min_playtime' => $thing->minplaytime->attributes()->value,
-                'max_playtime' => $thing->maxplaytime->attributes()->value,
-                'users_rated' => $thing->statistics->ratings->usersrated->attributes()->value,
-                'rating_average' => $thing->statistics->ratings->average->attributes()->value,
-                'rating_bayes' => $thing->statistics->ratings->bayesaverage->attributes()->value,
-                'stddev' => $thing->statistics->ratings->stddev->attributes()->value,
-                'weight_count' => $thing->statistics->ratings->numweights->attributes()->value,
-                'weight_average' => $thing->statistics->ratings->averageweight->attributes()->value
-            ]
-        );
+        $this->info('Updated: '.$game->name);
+    }
 
-        $this->info('Updated: '.$name);
+    protected function bggRequest($uri, $options)
+    {
+        $wait = 500000; // 0.5 seconds
+        $waited = microtime() - $this->lastBGGRequest;
+        if ($waited < $wait) {
+            usleep($wait - $waited);
+        }
+
+        $client = new Client([
+            'base_uri' => 'https://www.boardgamegeek.com/xmlapi2/'
+        ]);
+        $response = $client->get($uri, $options);
+
+        $xml = new \SimpleXMLElement($response->getBody());
+
+        $this->lastBGGRequest = microtime();
+
+        return $xml;
     }
 }

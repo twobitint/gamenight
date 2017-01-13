@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class BoardgamePlayerCount extends Model
 {
-    protected $connection = 'bgdb';
-    protected $table = 'players';
+    protected $table = 'bgg_recommendations';
+
+    protected $guarded = [];
 
     public function game()
     {

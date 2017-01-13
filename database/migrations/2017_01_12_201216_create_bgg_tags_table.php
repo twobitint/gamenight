@@ -17,10 +17,10 @@ class CreateBggTagsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('type');
-            $table->integer('boardgame_id')->unsigned();
+            $table->integer('bgg_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('boardgame_id')->references('id')->on('boardgames');
+            $table->unique(['type', 'bgg_id']);
         });
     }
 

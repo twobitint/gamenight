@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-    protected $connection = 'bgdb';
-    protected $table = 'tags';
+    protected $table = 'bgg_tags';
+
+    protected $guarded = [];
 
     public function games()
     {
-        return $this->belongsToMany('App\Boardgame');
+        return $this->belongsToMany('App\Boardgame', 'boardgame_bgg_tag', 'bgg_tag_id', 'boardgame_id');
     }
 }

@@ -30,7 +30,7 @@ class CreateBoardgamesTable extends Migration
             $table->decimal('rating_average', 7, 5);
             $table->decimal('rating_bayes', 7, 5);
             $table->decimal('stddev', 7, 5);
-            $table->integer('rank');
+            $table->integer('rank')->nullable();
             $table->integer('weight_count');
             $table->decimal('weight_average', 7, 5);
             $table->timestamps();
