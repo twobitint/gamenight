@@ -12,6 +12,6 @@ class Tag extends Model
 
     public function games()
     {
-        return $this->belongsToMany('App\Boardgame', 'boardgame_bgg_tag', 'bgg_tag_id', 'boardgame_id');
+        return $this->belongsToMany('App\Boardgame', 'boardgame_bgg_tag', 'bgg_tag_id', 'boardgame_id')->withTimestamps();
     }
 }

@@ -16,10 +16,7 @@ class UserController extends Controller
      */
     public function collection()
     {
-        $games = Boardgame::with('tags')
-            ->join('owned', 'owned.game_id', 'games.id')
-            ->where('owned.user', Auth::user()->username)
-            ->paginate(25);
+        $games = Auth::user()->games()->with('tags')->paginate(25);
 
         return view('boardgames')->with([
             'games' => $games

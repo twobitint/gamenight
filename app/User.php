@@ -29,6 +29,6 @@ class User extends Authenticatable
 
     public function games()
     {
-        // need to switch db still
+        return $this->belongsToMany('App\Boardgame')->withTimestamps();
     }
 }

@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use GuzzleHttp\Client;
+
 use App\Boardgame;
 use App\Tag;
 use App\BoardgamePlayerCount;
 
 class BGGController extends Controller
 {
+    protected static $lastBGGRequest = 0;
+
     public static function updateGame($bgg_thing)
     {
         $thing = $bgg_thing;
@@ -103,5 +107,25 @@ class BGGController extends Controller
                 ]
             );
         }
+    }
+
+    public static function bggRequest($uri, $options)
+    {
+        $wait = 0.5; // 0.5 seconds
+        $waited = microtime(true) - self::$lastBGGRequest;
+        if ($waited < $wait) {
+            usleep(($wait - $waited) * 1000000);
+        }
+
+        $client = new Client([
+            'base_uri' => 'https://www.boardgamegeek.com/xmlapi2/'
+        ]);
+        $response = $client->get($uri, $options);
+
+        $xml = new \SimpleXMLElement($response->getBody());
+
+        self::$lastBGGRequest = microtime(true);
+
+        return $xml;
     }
 }
