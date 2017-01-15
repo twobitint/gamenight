@@ -14,8 +14,15 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <h3 class="mb-0">{{ data.name }}</h3>
+                    <h3 class="mb-0">
+                        <a :href="'https://boardgamegeek.com/boardgame/'+data.id">{{ data.name }}</a>
+                    </h3>
                     <ul class="list-inline boardgame-categories">
+                        <li v-for="rank in data.ranks"
+                            v-if="rank.type == 'family'"
+                            style="display: inline-block">
+                            <small>{{ rank.name }}</small>
+                        </li>
                         <li v-for="tag in data.tags"
                             v-if="tag.type == 'boardgamecategory'"
                             style="display: inline-block;">

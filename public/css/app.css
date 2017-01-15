@@ -11608,6 +11608,10 @@ body {
   position: relative;
 }
 
+.boardgame-list .card-boardgame .card-header a {
+  color: white;
+}
+
 .boardgame-list .card-boardgame .card-header .boardgame-categories {
   line-height: 1rem;
 }

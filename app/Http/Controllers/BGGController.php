@@ -8,6 +8,7 @@ use GuzzleHttp\Client;
 
 use App\Boardgame;
 use App\Tag;
+use App\Rank;
 use App\BoardgamePlayerCount;
 
 class BGGController extends Controller
@@ -79,6 +80,27 @@ class BGGController extends Controller
             $tag_ids[] = $tag->id;
         }
         $game->tags()->sync($tag_ids);
+    }
+
+    public static function updateRanks($bgg_thing, $game)
+    {
+        foreach ($bgg_thing->statistics->ratings->ranks->rank as $rank) {
+            if ($rank['value'] != 'Not Ranked') {
+                $rank = Rank::updateOrCreate(
+                    [
+                        'type' => $rank['type'],
+                        'name' => $rank['name'],
+                        'boardgame_id' => $game->id
+                    ],
+                    [
+                        'bgg_id' => $rank['id'],
+                        'pretty_name' => $rank['friendlyname'],
+                        'rank' => $rank['value'],
+                        'bayes_average' => $rank['bayesaverage']
+                    ]
+                );
+            }
+        }
     }
 
     public static function updatePlayerCounts($bgg_thing, $game)

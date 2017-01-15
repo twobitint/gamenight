@@ -16,7 +16,7 @@ class UpdateGames extends Command
      *
      * @var string
      */
-    protected $signature = 'bgg:update {--all} {--hot} {--id} {--collection} {--force}';
+    protected $signature = 'bgg:update {--all} {--hot} {--id=} {--collection=} {--force}';
 
     /**
      * The console command description.
@@ -120,6 +120,7 @@ class UpdateGames extends Command
 
         BGGController::updateTags($thing, $game);
         BGGController::updatePlayerCounts($thing, $game);
+        BGGController::updateRanks($thing, $game);
 
         $this->info('Updated: '.$game->name);
     }
