@@ -17,14 +17,9 @@
     "laravel-elixir-vue-2": "^0.2.0",
     "laravel-elixir-webpack-official": "^1.0.2",
     "lodash": "^4.16.2",
-    "vue": "^2.0.1",
-    "vue-resource": "^1.0.3"
+    "vue": "^2.0.1"
   },
   "dependencies": {
-    "bggdb": "github:twobitint/bggdb",
-    "font-awesome": "^4.7.0",
-    "react": "^15.4.1",
-    "react-dom": "^15.4.1",
-    "tether": "^1.4.0"
+    "font-awesome": "^4.7.0"
   }
 }
