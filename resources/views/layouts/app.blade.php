@@ -92,6 +92,9 @@
         </div>
 
         <!-- Scripts -->
+        <script>
+            window.Laravel = { csrfToken: '{{ csrf_token() }}' };
+        </script>
         @section('scripts')
             <script src="{{ asset('js/app.js') }}"></script>
         @show

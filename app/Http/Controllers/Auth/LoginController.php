@@ -30,10 +30,10 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/home';
 
-    public function username()
-    {
-        return 'username';
-    }
+    // public function username()
+    // {
+    //     return 'username';
+    // }
 
     protected function redirectPath()
     {

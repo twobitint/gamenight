@@ -1,10 +1,7 @@
 @extends('layouts.app')
 
-@section('scripts')
-    <script src="{{ asset('js/collection.js') }}"></script>
-@endsection
-
 @section('content')
+    <game-collection></game-collection>
     <table class="table table-striped table-bordered">
         <thead>
             <tr>

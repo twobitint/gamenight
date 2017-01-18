@@ -6,9 +6,11 @@ var collection = new Vue({
         games: []
     },
     ready: function () {
+        console.log('hell');
         var self = this;
-        $.ajax({
-            url: '/api/user/me/collection'
-        });
+        this.$http.get('/user')
+            .then(response => {
+                console.log(response.data);
+            });
     }
 });
