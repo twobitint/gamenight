@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\REST\Controllers;
+namespace App\Http\Controllers\REST;
 
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\Controller;
 use App\Boardgame;
 
 class BoardgameController extends Controller

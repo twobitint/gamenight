@@ -13,10 +13,21 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
+Route::get('user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
-Route::resource('/boardgames', 'BoardgameController', ['only' => [
-    'index', 'show'
-]]);
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::resource('boardgames', 'BoardgameController', ['only' => [
+        'index', 'show'
+    ]]);
+
+    // Route::resource('collection/{username}', 'CollectionController', ['only' => [
+    //     'index', 'show'
+    // ]]);
+
+    Route::group(['prefix' => 'user/{username}'], function () {
+        Route::get('collection', 'CollectionController@forUser');
+    });
+
+});
