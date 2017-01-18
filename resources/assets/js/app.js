@@ -14,8 +14,8 @@ require('./bootstrap');
  */
 
 Vue.component('event', require('./components/Event.vue'));
-Vue.component('boardgame-card', require('./components/BoardgameCard.vue'));
-Vue.component('boardgame-row', require('./components/BoardgameRow.vue'));
+Vue.component('game-card', require('./components/GameCard.vue'));
+Vue.component('game-row', require('./components/GameRow.vue'));
 Vue.component('game-collection', require('./components/GameCollection.vue'));
 
 const app = new Vue({

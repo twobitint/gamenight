@@ -1,16 +1,25 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-event">
-                    <div class="panel-heading">Example Component</div>
-
-                    <div class="panel-body">
-                        I'm an example component!
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="game-collection">
+        <form class="form-inline my-sm-3">
+            <label class="mr-sm-2">Filter List</label>
+            <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" v-model="filter" placeholder="Type...">
+        </form>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th v-on:click="sortBy('name')">Name</th>
+                    <th v-on:click="sortBy('rating_bayes')">Rating</th>
+                    <th v-on:click="sortBy('weight_average')">Weight</th>
+                    <th>Categories</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="game in sortedGames"
+                    is="game-row"
+                    :data="game"
+                ></tr>
+            </tbody>
+        </table>
     </div>
 </template>
 
@@ -18,17 +27,37 @@
     export default {
         data: function () {
             return {
-                games: []
+                games: [],
+                sortType: 'name',
+                sortOrder: 'asc',
+                filter: ''
             };
         },
-        ready: function () {
-            //
+        computed: {
+            sortedGames: function () {
+                var filter = this.filter.toLowerCase();
+                var filtered = _.filter(this.games, f => {
+                    var tags = _.reduce(f.tags, (result, r) => {
+                        return result + (r.type == 'boardgamecategory' ? r.name + ' ' : '');
+                    }, '');
+                    return (f.name + tags).toLowerCase().includes(filter);
+                });
+                return _.orderBy(filtered, this.sortType, this.sortOrder);
+            }
+        },
+        methods: {
+            sortBy: function (type) {
+                if (this.sortType == type) {
+                    this.sortOrder = this.sortOrder == 'asc' ? 'desc' : 'asc';
+                }
+                this.sortType = type;
+            }
         },
         mounted() {
             var self = this;
             this.$http.get('/api/user/whumples/collection')
                 .then(response => {
-                    console.log(response.data);
+                    this.games = response.data;
                 });
         }
     }
