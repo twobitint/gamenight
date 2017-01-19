@@ -25,12 +25,16 @@
 
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item {{ strpos(Route::currentRouteName(), 'boardgames') === 0 ? 'events' : '' }}">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <li class="nav-item @active('home')">
+                        <a class="nav-link" href="#">Home @active('boardgames', '<span class="sr-only">(current)</span>')</a>
                     </li>
-                    <li class="nav-item dropdown {{ strpos(Route::currentRouteName(), 'boardgames') === 0 ? 'active' : '' }}">
+                    <li class="nav-item @active('hot')">
+                        <a class="nav-link" href="{{ url('/hot') }}">Hot List @active('hot', '<span class="sr-only">(current)</span>')</a>
+                    </li>
+                    <li class="nav-item dropdown @active('boardgames')">
+
                         <a class="nav-link dropdown-toggle"
-                            href="http://example.com"
+                            href="#"
                             id="navbarDropdownMenuLink"
                             data-toggle="dropdown"
                             aria-haspopup="true"
@@ -52,9 +56,9 @@
                             <li><a class="nav-link" href="{{ url('/login?from='.url()->current()) }}">Login</a></li>
                             <li><a class="nav-link" href="{{ url('/register') }}">Register</a></li>
                         @else
-                            <li class="nav-item dropdown {{ strpos(Route::currentRouteName(), 'user') === 0 ? 'active' : '' }}">
+                            <li class="nav-item dropdown @active('user')">
                                 <a class="nav-link dropdown-toggle"
-                                    href="http://example.com"
+                                    href="#"
                                     id="navbarDropdownMenuLink"
                                     data-toggle="dropdown"
                                     aria-haspopup="true"

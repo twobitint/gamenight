@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use GuzzleHttp\Client;
+use Carbon\Carbon;
 
 use App\Boardgame;
 use App\Tag;
@@ -60,7 +61,9 @@ class BGGController extends Controller
                 'rating_bayes' => $thing->statistics->ratings->bayesaverage['value'],
                 'stddev' => $thing->statistics->ratings->stddev['value'],
                 'weight_count' => $thing->statistics->ratings->numweights['value'],
-                'weight_average' => $thing->statistics->ratings->averageweight['value']
+                'weight_average' => $thing->statistics->ratings->averageweight['value'],
+                // The hot node is being added by the update command, not part of normal BGG dataset
+                'hot_at' => (string)$thing->hot['value'] ? Carbon::now() : null
             ]
         );
 

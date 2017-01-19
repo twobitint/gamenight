@@ -57,7 +57,7 @@ class UpdateGames extends Command
 
     protected function handleCollection($username)
     {
-
+        //
     }
 
     protected function handleFrom($id)
@@ -76,7 +76,7 @@ class UpdateGames extends Command
         $this->info('Getting Hot List from BGG.');
 
         foreach ($xml->item as $item) {
-            $this->handleOne((int)$item['id']);
+            $this->handleOne((int)$item['id'], true);
         }
     }
 
@@ -86,7 +86,7 @@ class UpdateGames extends Command
         $this->handleFrom($game->id);
     }
 
-    protected function handleOne($id)
+    protected function handleOne($id, $hot = false)
     {
         // Don't query for a thing if it's less than a day old
         if (!$this->option('force')) {
@@ -110,6 +110,8 @@ class UpdateGames extends Command
             return;
         }
 
+        // Add whether or not this is a hot item manually since this is not part of the normal data
+        $thing->addChild('hot')->addAttribute('value', $hot);
         $game = BGGController::updateGame($thing);
 
         // We have reached the end of the list OR this is not the type we want

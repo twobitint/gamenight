@@ -13,7 +13,7 @@
             </thead>
             <tbody>
                 @foreach($games as $game)
-                    <tr is="boardgame-row"
+                    <tr is="game-row"
                         :data="{!! htmlentities($game->toJson()) !!}"
                     ></tr>
                 @endforeach
@@ -25,9 +25,9 @@
             <div class="row justify-content-md-center">
                 <div class="col-md-8">
                     @foreach($games as $game)
-                        <boardgame-card
+                        <game-card
                             :data="{!! htmlentities($game->toJson()) !!}"
-                        ></boardgame-card>
+                        ></game-card>
                     @endforeach
                 </div>
             </div>

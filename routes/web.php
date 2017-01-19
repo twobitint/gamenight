@@ -19,6 +19,16 @@ Route::group(['prefix' => 'user', 'as' => 'user-'], function () {
     Route::any('collection', 'UserController@collection')->name('collection');
 });
 
+Route::get('hot', function () {
+    return view('boardgames')->with([
+        'games' => App\Boardgame::with('tags', 'ranks')
+            ->orderBy('hot_at', 'desc')
+            ->orderBy('rating_average', 'desc')
+            ->limit(8)
+            ->get()
+    ]);
+});
+
 Route::get('/boardgames/{players}/{username?}', function ($players, $username = null) {
 
     //$games = DB::connection('bgdb')
