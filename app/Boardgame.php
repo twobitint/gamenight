@@ -24,6 +24,7 @@ class Boardgame extends Model
 
     public function getCardImageAttribute()
     {
-        return Storage::url('bgg/game-images/'.$this->attributes['id'].'.jpg');
+        $filename = 'bgg/game-images/'.$this->attributes['id'].'.jpg';
+        return Storage::disk('public')->exists($filename) ? Storage::url($filename) : '/images/generic.jpg';
     }
 }

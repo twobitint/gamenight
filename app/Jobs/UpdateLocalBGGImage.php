@@ -46,8 +46,22 @@ class UpdateLocalBGGImage implements ShouldQueue
             Storage::disk('public')
                 ->put($filename, $img);
 
+            // Ensure expensive image resources are freed after manipulation
+            $img->destroy();
+
             $this->boardgame->image_cached_at = Carbon::now();
             $this->boardgame->save();
         }
+    }
+
+    /**
+     * The job failed to process.
+     *
+     * @param  Exception  $exception
+     * @return void
+     */
+    public function failed(Exception $exception)
+    {
+        $this->error('Failed saving image from: ' . $this->boardgame->name);
     }
 }

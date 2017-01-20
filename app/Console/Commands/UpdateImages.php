@@ -53,5 +53,7 @@ class UpdateImages extends Command
             $job = (new UpdateLocalBGGImage($game))->onQueue('images');
             dispatch($job);
         }
+        // This doesn't work
+        //$this->info('Queued image jobs successfully.');
     }
 }
