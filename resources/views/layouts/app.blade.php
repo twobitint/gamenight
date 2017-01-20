@@ -41,7 +41,7 @@
                             Hot List @active('hot', '<span class="sr-only">(current)</span>')
                         </a>
                     </li>
-                    <li class="nav-item dropdown @active('boardgames')">
+                    <li class="nav-item dropdown @active('bests')">
 
                         <a class="nav-link dropdown-toggle"
                             href="#"
@@ -52,11 +52,11 @@
                             Best With
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{{ route('boardgames', ['players' => 2]) }}">Two</a>
-                            <a class="dropdown-item" href="{{ route('boardgames', ['players' => 3]) }}">Three</a>
-                            <a class="dropdown-item" href="{{ route('boardgames', ['players' => 4]) }}">Four</a>
-                            <a class="dropdown-item" href="{{ route('boardgames', ['players' => 5]) }}">Five</a>
-                            <a class="dropdown-item" href="{{ route('boardgames', ['players' => 6]) }}">Six Plus</a>
+                            <a class="dropdown-item" href="{{ route('bests', ['players' => 2]) }}">Two</a>
+                            <a class="dropdown-item" href="{{ route('bests', ['players' => 3]) }}">Three</a>
+                            <a class="dropdown-item" href="{{ route('bests', ['players' => 4]) }}">Four</a>
+                            <a class="dropdown-item" href="{{ route('bests', ['players' => 5]) }}">Five</a>
+                            <a class="dropdown-item" href="{{ route('bests', ['players' => 6]) }}">Six Plus</a>
                         </div>
                     </li>
                 </ul>
