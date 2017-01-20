@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\UpdateGames::class,
         Commands\ImportCollection::class,
+        Commands\UpdateImages::class,
     ];
 
     /**
