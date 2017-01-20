@@ -17,7 +17,12 @@
 
         <nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top">
 
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler navbar-toggler-right"
+                type="button" data-toggle="collapse"
+                data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -26,10 +31,15 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item @active('home')">
-                        <a class="nav-link" href="#">Home @active('boardgames', '<span class="sr-only">(current)</span>')</a>
+                        <a class="nav-link" href="#">
+                            Home @active('boardgames', '<span class="sr-only">(current)</span>')
+                        </a>
                     </li>
                     <li class="nav-item @active('hot')">
-                        <a class="nav-link" href="{{ url('/hot') }}">Hot List @active('hot', '<span class="sr-only">(current)</span>')</a>
+                        <a class="nav-link"
+                            href="{{ url('/hot') }}">
+                            Hot List @active('hot', '<span class="sr-only">(current)</span>')
+                        </a>
                     </li>
                     <li class="nav-item dropdown @active('boardgames')">
 
@@ -78,9 +88,43 @@
                                         Logout
                                     </a>
 
-                                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form"
+                                        action="{{ url('/logout') }}"
+                                        method="POST"
+                                        style="display: none;">
                                         {{ csrf_field() }}
                                     </form>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown @active('group')">
+                                <a class="nav-link dropdown-toggle"
+                                    href="#"
+                                    id="navbarDropdownMenuLink"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false">
+                                    Groups <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right"
+                                    aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item"
+                                        href="#">
+                                        Whumps Warren <i aria-hidden="" class="fa fa-star-o"></i>
+                                    </a>
+                                    <a class="dropdown-item"
+                                        href="#">
+                                        Spaghetti Fascists
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item"
+                                        href="#">
+                                        Join a Group
+                                    </a>
+                                    <a class="dropdown-item"
+                                        href="#">
+                                        Start a New Group
+                                    </a>
                                 </div>
                             </li>
                         @endif
