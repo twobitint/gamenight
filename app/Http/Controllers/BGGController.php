@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use GuzzleHttp\Client;
 use Carbon\Carbon;
+use Image;
+use Storage;
 
 use App\Boardgame;
 use App\Tag;
@@ -66,6 +68,12 @@ class BGGController extends Controller
                 'hot_at' => (string)$thing->hot['value'] ? Carbon::now() : null
             ]
         );
+
+        // Save a local image
+        //Storage::put('bgg/game-images/'.$thing['id'].'jpg', self::bggImageRequest($thing->image));
+
+        $img = Image::make(str_replace('//', 'https://', $thing->image))->fit(720, 200)->encode('jpg', 75);
+        Storage::disk('public')->put('bgg/game-images/'.$thing['id'].'.jpg', $img);
 
         // Laravel really wants to set the id property to be 0 on Create, so change it manually
         $game->id = $thing['id'];
@@ -152,5 +160,10 @@ class BGGController extends Controller
         self::$lastBGGRequest = microtime(true);
 
         return $xml;
+    }
+
+    public static function bggImageRequest($url)
+    {
+        return file_get_contents($url);
     }
 }

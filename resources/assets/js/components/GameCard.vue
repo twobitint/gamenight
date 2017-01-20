@@ -1,7 +1,7 @@
 <template>
     <div class="card card-boardgame">
         <div class="card-header" v-bind:style="{
-            backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),url(' + data.image + ')',
+            backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),url(' + data.card_image + ')',
         }">
             <div class="row">
                 <div class="col">

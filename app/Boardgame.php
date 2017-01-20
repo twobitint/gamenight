@@ -4,9 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Storage;
+
 class Boardgame extends Model
 {
     protected $guarded = [];
+
+    protected $appends = ['card_image'];
 
     public function tags()
     {
@@ -16,5 +20,10 @@ class Boardgame extends Model
     public function ranks()
     {
         return $this->hasMany('App\Rank');
+    }
+
+    public function getCardImageAttribute()
+    {
+        return Storage::url('bgg/game-images/'.$this->attributes['id'].'.jpg');
     }
 }
