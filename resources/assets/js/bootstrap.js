@@ -44,3 +44,15 @@ Vue.http.interceptors.push((request, next) => {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+
+/**
+ * Infinite scroll loading support
+ */
+
+const InfiniteLoading = require('vue-infinite-loading');
+
+export default {
+  components: {
+    InfiniteLoading,
+  },
+};

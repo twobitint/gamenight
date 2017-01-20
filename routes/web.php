@@ -20,13 +20,7 @@ Route::group(['prefix' => 'user', 'as' => 'user-'], function () {
 });
 
 Route::get('hot', function () {
-    return view('boardgames')->with([
-        'games' => App\Boardgame::with('tags', 'ranks')
-            ->orderBy('hot_at', 'desc')
-            ->orderBy('rating_average', 'desc')
-            ->limit(8)
-            ->get()
-    ]);
+    return view('boardgames')->with(['source' => '/api/hot']);
 });
 
 Route::get('/boardgames/{players}/{username?}', function ($players, $username = null) {

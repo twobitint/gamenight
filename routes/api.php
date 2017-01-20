@@ -22,9 +22,14 @@ Route::group(['middleware' => 'auth:api'], function () {
         'index', 'show'
     ]]);
 
-    // Route::resource('collection/{username}', 'CollectionController', ['only' => [
-    //     'index', 'show'
-    // ]]);
+    Route::get('hot', function () {
+        return response()->json(
+            App\Boardgame::with('tags', 'ranks')
+                ->orderBy('hot_at', 'desc')
+                ->orderBy('rating_average', 'desc')
+                ->paginate(5)
+        );
+    });
 
     Route::group(['prefix' => 'user/{username}'], function () {
         Route::get('collection', 'CollectionController@forUser');

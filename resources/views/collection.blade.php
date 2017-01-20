@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <game-collection></game-collection>
+    <game-collection
+        :source="'{{ $source }}'">
+    </game-collection>
 @endsection

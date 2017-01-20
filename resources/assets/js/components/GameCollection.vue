@@ -25,6 +25,7 @@
 
 <script>
     export default {
+        props: ['source'],
         data: function () {
             return {
                 games: [],
@@ -54,8 +55,7 @@
             }
         },
         mounted() {
-            var self = this;
-            this.$http.get('/api/user/whumples/collection')
+            this.$http.get(this.source)
                 .then(response => {
                     this.games = response.data;
                 });

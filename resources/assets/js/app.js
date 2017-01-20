@@ -17,6 +17,7 @@ Vue.component('event', require('./components/Event.vue'));
 Vue.component('game-card', require('./components/GameCard.vue'));
 Vue.component('game-row', require('./components/GameRow.vue'));
 Vue.component('game-collection', require('./components/GameCollection.vue'));
+Vue.component('game-cardlist', require('./components/GameCardList.vue'));
 
 const app = new Vue({
     el: '#app'

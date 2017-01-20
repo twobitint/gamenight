@@ -16,10 +16,10 @@ class UserController extends Controller
      */
     public function collection()
     {
-        $games = Auth::user()->games()->with('tags');
+        //$games = Auth::user()->games()->with('tags');
 
         return view('collection')->with([
-            'games' => $games
+            'source' => '/api/user/' . Auth::user()->username . '/collection'
         ]);
     }
 }

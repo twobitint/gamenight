@@ -15,7 +15,7 @@
     </head>
     <body>
 
-        <nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top">
+        <nav class="navbar navbar-toggleable-sm navbar-light bg-faded fixed-top">
 
             <button class="navbar-toggler navbar-toggler-right"
                 type="button" data-toggle="collapse"
