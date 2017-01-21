@@ -9,7 +9,7 @@
                 </div>
                 <div class="col" style="text-align: right;">
                     <i class="fa fa-star" aria-hidden="true"></i>
-                    {{ parseFloat(Math.round(data.rating_bayes * 100) / 100).toFixed(2) }}
+                    {{ rating }}
                 </div>
             </div>
             <div class="row">
@@ -73,6 +73,10 @@
             weight: function () {
                 var weights = ['Very Light', 'Light', 'Medium', 'Heavy', 'Very Heavy'];
                 return weights[Math.floor(this.data.weight_average)];
+            },
+            rating: function () {
+                var rating = parseFloat(Math.round(this.data.rating_bayes * 100) / 100).toFixed(2);
+                return rating == 0 ? 'Unranked' : rating;
             }
         },
         mounted() {

@@ -8,7 +8,7 @@
                 ></tr>
                 <infinite-loading :on-infinite="onInfinite" ref="infiniteLoading">
                   <span slot="no-more">
-                    There is no more Hacker News :(
+                    There is nothing else!
                   </span>
                 </infinite-loading>
             </div>

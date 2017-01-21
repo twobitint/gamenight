@@ -41,6 +41,7 @@ Route::resource('boardgames', 'BoardgameController', ['only' => [
 Route::get('hot', function () {
     return response()->json(
         App\Boardgame::with('tags', 'ranks')
+            ->whereNotNull('hot_at')
             ->orderBy('hot_at', 'desc')
             ->orderBy('rating_average', 'desc')
             ->paginate(5)
