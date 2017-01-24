@@ -27,4 +27,14 @@ class Boardgame extends Model
         $filename = 'bgg/game-images/'.$this->attributes['id'].'.jpg';
         return Storage::disk('public')->exists($filename) ? Storage::url($filename) : '/images/generic.jpg';
     }
+
+    public function owners()
+    {
+        return $this->belongsToMany('App\User')->withTimestamps();
+    }
+
+    public function wishers()
+    {
+        return $this->belongsToMany('App\User', 'wishlist')->withTimestamps();
+    }
 }

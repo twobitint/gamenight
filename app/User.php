@@ -32,4 +32,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Boardgame')->withTimestamps();
     }
+
+    public function wishlist()
+    {
+        return $this->belongsToMany('App\Boardgame', 'wishlist')->withTimestamps();
+    }
 }
