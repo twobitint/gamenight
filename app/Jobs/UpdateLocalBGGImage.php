@@ -6,6 +6,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Facades\Log;
 
 use Image;
 use Storage;
@@ -15,7 +17,7 @@ use App\Boardgame;
 
 class UpdateLocalBGGImage implements ShouldQueue
 {
-    use InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $boardgame;
 
@@ -40,7 +42,7 @@ class UpdateLocalBGGImage implements ShouldQueue
 
         // Don't run the job if it's already been run before
         if (!Storage::disk('public')->exists($filename)) {
-            $img = Image::make(str_replace('//', 'https://', $this->boardgame->image))
+            $img = Image::make($this->boardgame->image)
                 ->fit(720, 200)
                 ->encode('jpg', 75);
             Storage::disk('public')
@@ -60,8 +62,10 @@ class UpdateLocalBGGImage implements ShouldQueue
      * @param  Exception  $exception
      * @return void
      */
-    public function failed(Exception $exception)
+    public function failed(\Exception $exception)
     {
-        $this->error('Failed saving image from: ' . $this->boardgame->name);
+        Log::debug($exception);
+        // $this->error('Failed saving image from: ' . $this->boardgame->name);
+        // $this->error($exception);
     }
 }

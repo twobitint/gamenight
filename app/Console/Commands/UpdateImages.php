@@ -50,8 +50,7 @@ class UpdateImages extends Command
             ->limit($limit)
             ->get();
         foreach ($games as $game) {
-            $job = (new UpdateLocalBGGImage($game))->onQueue('images');
-            dispatch($job);
+            UpdateLocalBGGImage::dispatch($game)->onQueue('images');
         }
         // This doesn't work
         //$this->info('Queued image jobs successfully.');
