@@ -136,7 +136,7 @@ class BGGController extends Controller
 
     public static function bggRequest($uri, $options)
     {
-        $wait = 0.5; // 0.5 seconds
+        $wait = 0.6; // 0.5 seconds
         $waited = microtime(true) - self::$lastBGGRequest;
         if ($waited < $wait) {
             usleep(($wait - $waited) * 1000000);

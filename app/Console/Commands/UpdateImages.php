@@ -44,7 +44,7 @@ class UpdateImages extends Command
     {
         $limit = $this->option('limit', 100);
         $games = Boardgame::whereNull('image_cached_at')
-            ->orderByRaw('ISNULL(rank)')
+            //->orderByRaw('ISNULL(rank)')
             ->orderBy('rank')
             ->orderBy('rating_average', 'desc')
             ->limit($limit)

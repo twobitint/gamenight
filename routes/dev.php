@@ -1,3 +1,3 @@
 <?php
 
-Route::any('adminer', '\Miroc\LaravelAdminer\AdminerAutologinController@index');
+//Route::any('adminer', '\Miroc\LaravelAdminer\AdminerAutologinController@index');
