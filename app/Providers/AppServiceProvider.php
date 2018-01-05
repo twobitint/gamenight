@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
             list($route, $result) = $this->getArguments($expression . ', \'active\'');
             return "<?php echo strpos(Route::currentRouteName(), $route) === 0 ? $result : ''; ?>";
         });
+
+        Schema::defaultStringLength(191);
     }
 
     /**

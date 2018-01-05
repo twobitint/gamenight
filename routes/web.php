@@ -38,4 +38,7 @@ Route::get('/home', 'HomeController@index');
 |
 */
 
+Route::get('auth/{provider}', 'Auth\ProviderAuthController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\ProviderAuthController@handleProviderCallback');
+
 Auth::routes();
